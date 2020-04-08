@@ -1,38 +1,35 @@
 
 function buildOverview() {
-    let url = "http://www.ist.rit.edu/api/about/";
 
-    var response = getText(url);
-    console.log(response);
-
-
-
-
+    myXhr('get',{path:'/about/'}).done(function(json){
+        //got good data back in json
+        //dump out all of the degree titles
+        console.log(json);
+        console.log(Object.entries(json));
+        // $.each(json.faculty,function(i, item){
+        //     console.log($(this));
+        //     console.log(item.name);
+        //     $('#content').append('<h2>'+item.title+'</h2>'+'<p>'+item.name+'</p>');
+        // });
+    });
 
 }
 
-function getText(url) {
-    var request = new XMLHttpRequest();
 
-    request.open("GET", url);
 
-    request.setRequestHeader("Content-type", "application/json");
 
-    request.onreadystatechange = function() { // Define event listener
-        // If the request is compete and was successful
-        if (request.readyState === 4 && request.status === 200) {
-            var type = request.getResponseHeader("Content-Type");
-            console.log(type);
-            if (type.match("application/json")) // Make sure response is json
-                callback(request.response);
-
-            if (type.indexOf("xml") !== -1 && request.responseXML)
-                callback(request.responseXML); // Document response
-            else if (type === "application/json")
-                callback(JSON.parse(request.responseText)); // JSON response
-            else
-                callback(request.responseText); // String response
-        }
-    };
-    request.send(null);
+function myXhr(t, d){
+    return $.ajax({
+        type:t,
+        url:'http://serenity.ist.rit.edu/~klw2488/340/proxy/proxy.php',
+        dataType:'json',
+        data:d,
+        cache:false,
+        async:true,
+        // beforeSend:function(){
+        //     $(id).append('<img src="gears.gif" class="spin"/>');
+        // }
+    }).fail(function(){
+        //handle failure
+    });
 }
