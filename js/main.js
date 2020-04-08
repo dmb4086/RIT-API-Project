@@ -1,20 +1,28 @@
 
 
-
+const removeChildren = (div) => {
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+}
 
 
 function buildOverview() {
+    const titleDiv =  document.getElementById("overview-title");
+    const containerDiv =  document.getElementById("overview-description");
 
-    myXhr('get',{path:'/degrees/'}).done(function(json){
-        //got good data back in json
-        //dump out all of the degree titles
-        console.log(json);
-        console.log(Object.entries(json));
-        // $.each(json.faculty,function(i, item){
-        //     console.log($(this));
-        //     console.log(item.name);
-        //     $('#content').append('<h2>'+item.title+'</h2>'+'<p>'+item.name+'</p>');
-        // });
+
+    myXhr('get',{path:'/about/'}).done(function(json){
+        const title = document.createTextNode(json.title);
+        const description = document.createTextNode(json.description);
+
+        removeChildren("overview-title");
+        removeChildren("overview-description");
+
+        titleDiv.appendChild(title);
+        containerDiv.appendChild(description);
+
+
     });
 
 }
@@ -30,9 +38,7 @@ function myXhr(t, d){
         data:d,
         cache:false,
         async:true,
-        // beforeSend:function(){
-        //     $(id).append('<img src="gears.gif" class="spin"/>');
-        // }
+
     }).fail(function(){
         //handle failure
     });
