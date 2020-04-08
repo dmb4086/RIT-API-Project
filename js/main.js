@@ -5,7 +5,7 @@
 
 function buildOverview() {
 
-    myXhr('get',{path:'/about/'}).done(function(json){
+    myXhr('get',{path:'/degrees/'}).done(function(json){
         //got good data back in json
         //dump out all of the degree titles
         console.log(json);
@@ -25,7 +25,7 @@ function buildOverview() {
 function myXhr(t, d){
     return $.ajax({
         type:t,
-        url:'http://serenity.ist.rit.edu/~klw2488/340/proxy/proxy.php',
+        url:'http://serenity.ist.rit.edu/~plgics/proxy.php',
         dataType:'json',
         data:d,
         cache:false,
