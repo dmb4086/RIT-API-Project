@@ -57,6 +57,7 @@
 }
 
 .belize {
+<<<<<<< HEAD
     color: #C2FFF9;
 }
 
@@ -70,6 +71,21 @@
 
 .midnight {
     color: #FFC2C2;
+=======
+  color: #fff;
+}
+
+.pomegranate {
+  color: #fff;
+}
+
+.green {
+  color: #fff;
+}
+
+.midnight {
+  color: #fff;
+>>>>>>> 73859c6a219bb6b4c045375182a1cbb2d8f05b52
 }
 
 
