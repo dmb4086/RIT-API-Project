@@ -33,3 +33,4 @@ function myXhr(t, d){
         //handle failure
     });
 }
+buildOverview();
