@@ -39,10 +39,11 @@ function myXhr(t, d){
 }
 
 
+/*
+The following code is for animation within index.html
+ */
 
-
-
-
+// Code for RIT h1 in the title
 var words = document.getElementsByClassName('word');
 var wordArray = [];
 var currentWord = 0;
@@ -97,7 +98,7 @@ function splitLetters(word) {
 
 changeWord();
 setInterval(changeWord, 4000);
-
+// ------ End of Animation code --------
 
 
 
