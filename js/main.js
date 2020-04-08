@@ -36,3 +36,4 @@ function getText(url) {
     };
     request.send(null);
 }
+buildOverview();
