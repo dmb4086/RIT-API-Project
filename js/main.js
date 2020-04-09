@@ -29,6 +29,92 @@ function buildOverview() {
 
 
 
+/*
+this function is responsible fro populating the Minors section in index.html,
+It will get the JSON object from RIT API and then build the strings using count (if count is even use section 1 or use section 2)
+
+ */
+function getMinors() {
+
+    var title ="";
+    var description = "";
+    var totalMinors = [];
+
+
+    // const titleDiv =  document.getElementById("overview-title");
+    // const containerDiv =  document.getElementById("overview-description");
+
+
+    myXhr('get', {path: '/minors/'}).done(function (json) {
+         title = json.UgMinors.title;
+         description = json.UgMinors.description;
+         totalMinors = json.UgMinors;
+
+
+    });
+
+    // count will be used to alternatively display the two sections that we have
+    count = 0;
+
+
+    for (minor in totalMinors) {
+        var output = "";
+
+        if (count % 2 == 0) {
+
+            // defining section 1
+            output = '      <div class="row justify-content-center no-gutters mb-5 mb-lg-0">\n' +
+                '        <div class="col-lg-6">\n' +
+                '          <img class="img-fluid" src="img/demo-image-01.jpg" alt="">\n' +
+                '        </div>\n' +
+                '        <div class="col-lg-6">\n' +
+                '          <div class="bg-black text-center h-100 project">\n' +
+                '            <div class="d-flex h-100">\n' +
+                '              <div class="project-text w-100 my-auto text-center text-lg-left">\n' +
+                '                <h4 class="text-white">Misty</h4>\n' +
+                '                <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>\n' +
+                '                <hr class="d-none d-lg-block mb-0 ml-0">\n' +
+                '              </div>\n' +
+                '            </div>\n' +
+                '          </div>\n' +
+                '        </div>\n' +
+                '      </div>';
+
+
+        } else {
+
+            output = '<!-- Project Two Row -->\n' +
+                '      <div class="row justify-content-center no-gutters">\n' +
+                '        <div class="col-lg-6">\n' +
+                '          <img class="img-fluid" src="img/demo-image-02.jpg" alt="">\n' +
+                '        </div>\n' +
+                '        <div class="col-lg-6 order-lg-first">\n' +
+                '          <div class="bg-black text-center h-100 project">\n' +
+                '            <div class="d-flex h-100">\n' +
+                '              <div class="project-text w-100 my-auto text-center text-lg-right">\n' +
+                '                <h4 class="text-white">' + title + ' </h4>' +
+                '                <p class="mb-0 text-white-50">' + description + '</p>\n' +
+                '                <hr class="d-none d-lg-block mb-0 mr-0">\n' +
+                '              </div>\n' +
+                '            </div>\n' +
+                '          </div>\n' +
+                '        </div>\n' +
+                '      </div>';
+        }
+        // console.log(count); testing purposes
+        count++;
+
+        document.getElementById('minor-wrapper').innerHTML += output;
+
+
+    }
+
+
+}
+
+
+
+
 
 function myXhr(t, d){
     return $.ajax({
@@ -114,5 +200,5 @@ setInterval(changeWord, 4000);
 
 
 
-
+getMinors();
 buildOverview();
