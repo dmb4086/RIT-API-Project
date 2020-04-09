@@ -92,6 +92,16 @@ function buildStaffFaculty() {
     });
 
 }
+/*
+Truncate a string (first argument) if it is longer than the given maximum string length (second argument). Return the truncated string with a ... ending.
+ */
+function truncateString(str, num) {
+    if (str.length <= num) {
+        return str
+    }
+    return str.slice(0, num) + '...'
+}
+
 
 
 
@@ -106,39 +116,46 @@ function getMinors() {
     var description = "";
     var totalMinors = [];
 
-
     // const titleDiv =  document.getElementById("overview-title");
     // const containerDiv =  document.getElementById("overview-description");
 
 
     myXhr('get', {path: '/minors/'}).done(function (json) {
-         title = json.UgMinors.title;
-         description = json.UgMinors.description;
          totalMinors = json.UgMinors;
 
+        console.log(totalMinors);
 
-    });
+        console.log(totalMinors[1].description.length);
+        console.log(truncateString(totalMinors[1].description, 500));
 
-    // count will be used to alternatively display the two sections that we have
+        // count will be used to alternatively display the two sections that we have
     count = 0;
+    i = 0 ;
+
+        // console.log(totalMinors[0].title);
 
 
-    for (minor in totalMinors) {
-        var output = "";
+        while ( i <= totalMinors.length/2) {
+            console.log(totalMinors[i].title);
+
+            // console.log(minor);
+            var output = "";
+
+
 
         if (count % 2 == 0) {
 
             // defining section 1
             output = '      <div class="row justify-content-center no-gutters mb-5 mb-lg-0">\n' +
                 '        <div class="col-lg-6">\n' +
-                '          <img class="img-fluid" src="img/demo-image-01.jpg" alt="">\n' +
+                '          <img class="img-fluid" src="img/minorimage.jpeg" alt="">\n' +
                 '        </div>\n' +
                 '        <div class="col-lg-6">\n' +
                 '          <div class="bg-black text-center h-100 project">\n' +
                 '            <div class="d-flex h-100">\n' +
                 '              <div class="project-text w-100 my-auto text-center text-lg-left">\n' +
-                '                <h4 class="text-white">Misty</h4>\n' +
-                '                <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>\n' +
+                '                <h4 class="text-white">'+totalMinors[i].title+'</h4>\n' +
+                '                <p class="mb-0 text-white-50">'+truncateString(totalMinors[i].description, 300)+'</p>\n' +
                 '                <hr class="d-none d-lg-block mb-0 ml-0">\n' +
                 '              </div>\n' +
                 '            </div>\n' +
@@ -158,8 +175,8 @@ function getMinors() {
                 '          <div class="bg-black text-center h-100 project">\n' +
                 '            <div class="d-flex h-100">\n' +
                 '              <div class="project-text w-100 my-auto text-center text-lg-right">\n' +
-                '                <h4 class="text-white">' + title + ' </h4>' +
-                '                <p class="mb-0 text-white-50">' + description + '</p>\n' +
+                '                <h4 class="text-white">' + totalMinors[i].title + ' </h4>' +
+                '                <p class="mb-0 text-white-50">' + truncateString(totalMinors[i].description, 300) + '</p>\n' +
                 '                <hr class="d-none d-lg-block mb-0 mr-0">\n' +
                 '              </div>\n' +
                 '            </div>\n' +
@@ -172,9 +189,13 @@ function getMinors() {
 
         document.getElementById('minor-wrapper').innerHTML += output;
 
-
+            i++;
     }
 
+
+
+
+    });
 
 }
 
