@@ -102,7 +102,7 @@
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 300px;
+    width: 330px;
     height: 35em;
     margin: 1em;
     text-align: center;
@@ -115,10 +115,11 @@
 }
 
 .cardImg{
-    width: 300px;
+    width: 330px;
     height: 300px;
 }
 
+<<<<<<< HEAD
 
 
 
@@ -156,7 +157,7 @@ Light reflection button styles
 
 
 
-.btn {
+.btn2 {
   letter-spacing: 0.1em;
   cursor: pointer;
   font-size: 14px;
@@ -230,6 +231,20 @@ Light reflection button styles
 
 
 
+=======
+#faculty-staff-header{
+    color: #F76902;
+}
+#faculty-staff-container{
+    height: 630px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+>>>>>>> origin/master
 
 
 
