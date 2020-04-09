@@ -1,4 +1,5 @@
-
+const curFacultyCount = 0;
+const curStaffCount = 0;
 
 const removeChildren = (div) => {
     while (div.firstChild) {
@@ -12,6 +13,7 @@ function buildOverview() {
     const containerDiv =  document.getElementById("overview-description");
 
 
+
     myXhr('get',{path:'/about/'}).done(function(json){
         const title = document.createTextNode(json.title);
         const description = document.createTextNode(json.description);
@@ -21,6 +23,70 @@ function buildOverview() {
 
         titleDiv.appendChild(title);
         containerDiv.appendChild(description);
+
+
+    });
+
+}
+
+
+function buildStaffFaculty() {
+    const titleDiv =  document.getElementById("faculty-staff-header");
+    const titleSubDiv =  document.getElementById("faculty-staff-sub-header");
+    const containerDiv =  document.getElementById("faculty-staff-container");
+
+    myXhr('get',{path:'/people/'}).done(function(json){
+        const titleText = document.createTextNode(json.title);
+        titleDiv.appendChild(titleText);
+        const titleSubDivText = document.createTextNode(json.subTitle);
+        titleSubDiv.appendChild(titleSubDivText);
+        const faculty = json.faculty;
+        const staff = json.staff;
+
+        const facultyCount = faculty.length;
+        const staffCount = staff.length;
+
+        console.log(faculty[0]);
+
+
+        const makeCard = (name, title, office, imgSrc) => {
+            const div = document.createElement("div");
+            div.setAttribute("class", "card");
+
+            const img = document.createElement("img");
+            img.setAttribute("class", "cardImg");
+            img.setAttribute("src", imgSrc);
+
+            const h1 = document.createElement("h1");
+            h1.setAttribute("class", "cardHeader");
+            h1.appendChild(document.createTextNode(name));
+
+            const p = document.createElement("p");
+            p.setAttribute("class", "cardP");
+            p.appendChild(document.createTextNode(title));
+
+            const secondP = document.createElement("p");
+            secondP.setAttribute("class", "cardP");
+            secondP.appendChild(document.createTextNode(office));
+
+
+            div.appendChild(img);
+            div.appendChild(h1);
+            div.appendChild(p);
+            div.appendChild(secondP);
+
+            containerDiv.appendChild(div);
+
+        }
+
+        for (let i = 0; i < faculty.length; i++) {
+            makeCard(faculty[i].name,faculty[i].title, faculty[i].office, faculty[i].imagePath);
+        }
+
+        for (let i = 0; i < staff.length; i++) {
+            makeCard(staff[i].name,staff[i].title, staff[i].office, staff[i].imagePath);
+        }
+
 
 
     });
@@ -202,3 +268,4 @@ setInterval(changeWord, 4000);
 
 getMinors();
 buildOverview();
+buildStaffFaculty();
