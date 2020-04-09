@@ -12,8 +12,6 @@ function buildOverview() {
     const titleDiv =  document.getElementById("overview-title");
     const containerDiv =  document.getElementById("overview-description");
 
-
-
     myXhr('get',{path:'/about/'}).done(function(json){
         const title = document.createTextNode(json.title);
         const description = document.createTextNode(json.description);
@@ -92,6 +90,10 @@ function buildStaffFaculty() {
     });
 
 }
+
+
+
+
 /*
 Truncate a string (first argument) if it is longer than the given maximum string length (second argument). Return the truncated string with a ... ending.
  */
