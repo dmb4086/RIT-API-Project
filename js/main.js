@@ -101,7 +101,8 @@ function truncateString(str, num) {
     }
     return str.slice(0, num) + '...'
 }
-var flag = false;
+
+// var flag = true;
 // function loadMore(){
 //
 //     if (flag){
@@ -111,8 +112,6 @@ var flag = false;
 //     // document.getElementById('loadmoretext').innerHTML = "";
 //     // document.getElementById('loadmoretext').innerHTML = "Load Less";
 //         console.log(flag);
-//         console.log(loadfactor);
-//         console.log('if1');
 //
 //     }
 //     if (!flag){
@@ -124,7 +123,7 @@ var flag = false;
 //         // console.log(loadfactor);
 //
 //     }
-
+//
 // }
 
 
@@ -134,7 +133,7 @@ this function is responsible fro populating the Minors section in index.html,
 It will get the JSON object from RIT API and then build the strings using count (if count is even use section 1 or use section 2)
 
  */
-function getMinors() {
+function getMinors(loadfactor) {
 
     var title ="";
     var description = "";
@@ -159,8 +158,8 @@ function getMinors() {
         // console.log(totalMinors[0].title);
 
 
-        while ( i <= totalMinors.length/2) {
-            console.log(totalMinors[i].title);
+        while ( i <= totalMinors.length/loadfactor) {
+            // console.log(totalMinors[i].title);
 
             // console.log(minor);
             var output = "";
@@ -220,16 +219,7 @@ function getMinors() {
 
 
     });
-//     $(function(){
-//         $("div").slice(0, 4).show(); // select the first ten
-//         $("#load").click(function(e){ // click event for load more
-//             e.preventDefault();
-//             $("div:hidden").slice(0, 4).show(); // select next 10 hidden divs and show them
-//             if($("div:hidden").length == 0){ // check if any hidden divs still exist
-//                 alert("No more divs"); // alert if there are none left
-//             }
-//         });
-//     });
+
 
 }
 
@@ -322,6 +312,6 @@ setInterval(changeWord, 4000);
 
 
 
-getMinors();
+getMinors(4);
 buildOverview();
 buildStaffFaculty();
