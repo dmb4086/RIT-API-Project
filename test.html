@@ -7,7 +7,7 @@
 	<meta name="author" content="Your Name">
 	<meta name="description" content="Example description">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/grayscale.css">
+	<link rel="stylesheet" href="css/test.css">
 	<link rel="icon" type="image/x-icon" href=""/>
 </head>
 
@@ -15,89 +15,125 @@
 	<header></header>
 	<main>
 
-        <div class="animationjs">
-  <p class="animatedRIT">Black is&nbsp;</p>
-    <span class="word wisteria">beautiful.
-</span>
-    <span class="word midnight">powerful.</span>
-    <span class="word belize">divine.</span>
-    <span class="word pomegranate">fancy.</span>
-    <span class="word green">elegant.</span>
-    <span class="word belize">rich.</span>
-  <span class="word wisteria">smart.</span>
-    <span class="word midnight">free.</span>
-    <span class="word pomegranate">love.</span>
-    <span class="word green">strength.</span>
-    <span class="word belize">courage.</span>
-
-    <span class="word wisteria">style.</span>
-    <span class="word pomegranate">cool</span>
-
-    <span class="word green">hip.</span>
-        <span class="word midnight">wealth.</span>
+        <div class="card-section">
+  <h1>Your Selection</h1>
+  <h4>Premium Content based on your personal viewing habits</h4>
+  <div class="card-list">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1433446787703-42d5bf446876?w=320"/>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1584645511189-2a471d586ac2?w=320"/>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1580237754524-f26ed36fa85c?w=320"/>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1583132648336-a4f3a079a526?w=320"/>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1468082547792-d37c6c74003e?w=320"/>
+    </div>
+  </div>
 </div>
+
+<div class="card-section">
+  <h1>More Items</h1>
+  <h4>Hover over the picture to get an awesome 3d parallax effect</h4>
+  <div class="card-list">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=320"/>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1518365428912-757c887d86c0?w=320"/>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1489573280374-2e193c63726c?w=320"/>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1535190878546-79d24dae2530?w=320"/>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1494675006433-9e9428eba6c7?w=320"/>
+    </div>
+  </div>
+</div>
+
+
 
 
 
     </main>
 	<footer></footer>
-<!--
 	<script type="text/javascript">
-var words = document.getElementsByClassName('word');
-var wordArray = [];
-var currentWord = 0;
+var cards = $('.card');
 
-words[currentWord].style.opacity = 1;
-for (var i = 0; i < words.length; i++) {
-  splitLetters(words[i]);
-}
+cards.each( (index, card) => {
+  $(card).prepend("<div class='shineLayer'></div>")
+});
 
-function changeWord() {
-  var cw = wordArray[currentWord];
-  var nw = currentWord == words.length-1 ? wordArray[0] : wordArray[currentWord+1];
-  for (var i = 0; i < cw.length; i++) {
-    animateLetterOut(cw, i);
-  }
+$(".card").mousemove( function(event) {
 
-  for (var i = 0; i < nw.length; i++) {
-    nw[i].className = 'letter behind';
-    nw[0].parentElement.style.opacity = 1;
-    animateLetterIn(nw, i);
-  }
+  var card = this;
+  var mouseCoord = {
+    x: event.offsetX,
+    y: event.offsetY
+  };
 
-  currentWord = (currentWord == wordArray.length-1) ? 0 : currentWord+1;
-}
+  //cleanup
+  mouseCoord.x = mouseCoord.x < 0 ? 0 : mouseCoord.x;
+  mouseCoord.x = mouseCoord.x > $(card).width() ? $(card).width() : mouseCoord.x;
+  mouseCoord.y = mouseCoord.y < 0 ? 0 : mouseCoord.y;
+  mouseCoord.y = mouseCoord.y > $(card).height() ? $(card).height() : mouseCoord.y;
 
-function animateLetterOut(cw, i) {
-  setTimeout(function() {
-		cw[i].className = 'letter out';
-  }, i*80);
-}
 
-function animateLetterIn(nw, i) {
-  setTimeout(function() {
-		nw[i].className = 'letter in';
-  }, 340+(i*80));
-}
+  var transformCard = "scale3d(1.08, 1.08, 1.08) perspective(700px)";
+  transformCard += " ";
+  //rotateX between -9 and +9
+  transformCard += "rotateX(" + ( ( ( (mouseCoord.y / $(card).height()) * 18 ) - 9 )) + "deg)";
+  transformCard += " ";
+  //rotateY between -13 and +13
+  transformCard += "rotateY(" + ( ( ( (mouseCoord.x / $(card).width()) * 26 ) - 13 ) * -1 ) + "deg)";
 
-function splitLetters(word) {
-  var content = word.innerHTML;
-  word.innerHTML = '';
-  var letters = [];
-  for (var i = 0; i < content.length; i++) {
-    var letter = document.createElement('span');
-    letter.className = 'letter';
-    letter.innerHTML = content.charAt(i);
-    word.appendChild(letter);
-    letters.push(letter);
-  }
+  transformCard += " ";
+  //translateX between -3 and +3
+  transformCard += "translateX(" + ( ( (mouseCoord.x / $(card).width()) * 6 ) - 3 ) + "px)";
+  transformCard += " ";
+  //translateY between -5 and +5
+  transformCard += "translateY(" + ( ( (mouseCoord.y / $(card).height()) * 10 ) - 5 ) + "px)";
 
-  wordArray.push(letters);
-}
+  $(card).css("transform", transformCard);
 
-changeWord();
-setInterval(changeWord, 4000);</script>
--->
+  //rotateX between -5 and +5
+  var transformCardImage = "rotateX(" + ( ( ( (mouseCoord.y / $(card).height()) * 10 ) - 5 ) * -1 ) + "deg)";
+  transformCardImage += " ";
+  //rotateX between -13 and +13
+  transformCardImage += "rotateY(" + ( ( ( (mouseCoord.x / $(card).width()) * 26 ) - 13 ) * -1 ) + "deg)";
+  $(card).find("img").css("transform", transformCardImage);
+
+  //opacity of ShineLayer between 0.1 and 0.4
+  var backgroundShineLayerOpacity = ((mouseCoord.y / $(card).height()) * 0.3) + 0.1;
+  //bottom=0deg; left=90deg; top=180deg; right=270deg;
+  var backgroundShineLayerDegree = (Math.atan2(mouseCoord.y - ($(card).height()/2), mouseCoord.x - ($(card).width()/2)) * 180/Math.PI) - 90;
+  backgroundShineLayerDegree = backgroundShineLayerDegree < 0 ? backgroundShineLayerDegree += 360 : backgroundShineLayerDegree
+  var backgroundShineLayer = "linear-gradient(" + backgroundShineLayerDegree + "deg, rgba(255,255,255," + backgroundShineLayerOpacity + ") 0%, rgba(255,255,255,0) 80%)";
+  $(card).find(".shineLayer").css("background", backgroundShineLayer);
+});
+
+$(".card").mouseenter( function(event) {
+  $(".card").addClass("blur");
+  $(this).removeClass("blur");
+});
+
+$(".card").mouseleave( function(event) {
+  var card = this;
+  $(card).css("transform", "scale3d(1, 1, 1)");
+  $(card).find("img").css("transform", "");
+  $(card).find(".shineLayer").css("background", "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 80%)");
+
+  $(".card").removeClass("blur");
+});
+    </script>
 </body>
 
 </html>
