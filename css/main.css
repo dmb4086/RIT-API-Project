@@ -119,7 +119,6 @@
     height: 300px;
 }
 
-<<<<<<< HEAD
 
 
 
@@ -139,8 +138,9 @@ Light reflection button styles
   width: 100%;
   height: 100%;
   margin: 0 auto;
-/*   padding: 2em 0em; */
+   padding: 1em 0em;
     color: #fff;
+
 
 }
 
@@ -150,9 +150,9 @@ Light reflection button styles
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  padding:  40px 0px;
+  padding:  0px 0px;
   width: 240px;
-    height: 20px
+    height: 3em;
 }
 
 
@@ -169,7 +169,7 @@ Light reflection button styles
   text-transform: uppercase;
   width: 100%;
 }
-.btn:hover {
+.btn2:hover {
   text-decoration: none;
 }
 
@@ -231,7 +231,7 @@ Light reflection button styles
 
 
 
-=======
+
 #faculty-staff-header{
     color: #F76902;
 }
@@ -244,7 +244,6 @@ Light reflection button styles
 ::-webkit-scrollbar {
     display: none;
 }
->>>>>>> origin/master
 
 
 

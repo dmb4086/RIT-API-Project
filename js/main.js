@@ -159,7 +159,7 @@ function getMinors() {
         // console.log(totalMinors[0].title);
 
 
-        while ( i <= totalMinors.length) {
+        while ( i <= totalMinors.length/2) {
             console.log(totalMinors[i].title);
 
             // console.log(minor);
@@ -230,7 +230,7 @@ function getMinors() {
 //             }
 //         });
 //     });
-//
+
 }
 
 
