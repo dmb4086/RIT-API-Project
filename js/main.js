@@ -101,7 +101,31 @@ function truncateString(str, num) {
     }
     return str.slice(0, num) + '...'
 }
+var flag = false;
+// function loadMore(){
+//
+//     if (flag){
+//
+//     getMinors(1);
+//     flag = false;
+//     // document.getElementById('loadmoretext').innerHTML = "";
+//     // document.getElementById('loadmoretext').innerHTML = "Load Less";
+//         console.log(flag);
+//         console.log(loadfactor);
+//         console.log('if1');
+//
+//     }
+//     if (!flag){
+//         getMinors(2);
+//         flag = true;
+//         // document.getElementById('loadmoretext').innerHTML = "";
+//         // document.getElementById('loadmoretext').innerHTML = "Load More";
+//         console.log(flag);
+//         // console.log(loadfactor);
+//
+//     }
 
+// }
 
 
 
@@ -135,7 +159,7 @@ function getMinors() {
         // console.log(totalMinors[0].title);
 
 
-        while ( i <= totalMinors.length/2) {
+        while ( i <= totalMinors.length) {
             console.log(totalMinors[i].title);
 
             // console.log(minor);
@@ -196,8 +220,19 @@ function getMinors() {
 
 
     });
+//     $(function(){
+//         $("div").slice(0, 4).show(); // select the first ten
+//         $("#load").click(function(e){ // click event for load more
+//             e.preventDefault();
+//             $("div:hidden").slice(0, 4).show(); // select next 10 hidden divs and show them
+//             if($("div:hidden").length == 0){ // check if any hidden divs still exist
+//                 alert("No more divs"); // alert if there are none left
+//             }
+//         });
+//     });
+//
+// }
 
-}
 
 
 
