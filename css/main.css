@@ -229,6 +229,14 @@ Light reflection button styles
 /*---------- end styles for button --------*/
 
 
+.link a {
+
+    color: #F76902;
+}
+
+.hide {
+  display: none;
+}
 
 
 
@@ -245,6 +253,9 @@ Light reflection button styles
 ::-webkit-scrollbar {
     display: none;
 }
+
+
+#more {display: none;}
 
 
 

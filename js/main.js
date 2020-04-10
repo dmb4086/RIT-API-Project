@@ -9,12 +9,14 @@ const removeChildren = (div) => {
 
 
 function buildOverview() {
-    const titleDiv =  document.getElementById("overview-title");
-    const containerDiv =  document.getElementById("overview-description");
+    const titleDiv = document.getElementById("overview-title");
+    const containerDiv = document.getElementById("overview-description");
 
 
 
-    myXhr('get',{path:'/about/'}).done(function(json){
+    myXhr('get', {
+        path: '/about/'
+    }).done(function (json) {
         const title = document.createTextNode(json.title);
         const description = document.createTextNode(json.description);
 
@@ -31,11 +33,13 @@ function buildOverview() {
 
 
 function buildStaffFaculty() {
-    const titleDiv =  document.getElementById("faculty-staff-header");
-    const titleSubDiv =  document.getElementById("faculty-staff-sub-header");
-    const containerDiv =  document.getElementById("faculty-staff-container");
+    const titleDiv = document.getElementById("faculty-staff-header");
+    const titleSubDiv = document.getElementById("faculty-staff-sub-header");
+    const containerDiv = document.getElementById("faculty-staff-container");
 
-    myXhr('get',{path:'/people/'}).done(function(json){
+    myXhr('get', {
+        path: '/people/'
+    }).done(function (json) {
         const titleText = document.createTextNode(json.title);
         titleDiv.appendChild(titleText);
         const titleSubDivText = document.createTextNode(json.subTitle);
@@ -80,11 +84,11 @@ function buildStaffFaculty() {
         }
 
         for (let i = 0; i < faculty.length; i++) {
-            makeCard(faculty[i].name,faculty[i].title, faculty[i].office, faculty[i].imagePath);
+            makeCard(faculty[i].name, faculty[i].title, faculty[i].office, faculty[i].imagePath);
         }
 
         for (let i = 0; i < staff.length; i++) {
-            makeCard(staff[i].name,staff[i].title, staff[i].office, staff[i].imagePath);
+            makeCard(staff[i].name, staff[i].title, staff[i].office, staff[i].imagePath);
         }
 
 
@@ -99,8 +103,37 @@ function truncateString(str, num) {
     if (str.length <= num) {
         return str
     }
-    return str.slice(0, num) + '...'
+    let output = '<span id="dots">...</span><span id="more">';
+    console.log(output);
+    var rest = str.slice(num);
+    console.log(rest);
+    return str.slice(0, num) + output + "...";
 }
+
+function readMore() {
+    $('.read-more-content').addClass('hide')
+    $('.read-more-show, .read-more-hide').removeClass('hide')
+
+// Set up the toggle effect:
+    $('.read-more-show').on('click', function(e) {
+        $(this).next('.read-more-content').removeClass('hide');
+        $(this).addClass('hide');
+        e.preventDefault();
+    });
+
+// Changes contributed by @diego-rzg
+    $('.read-more-hide').on('click', function(e) {
+        var p = $(this).parent('.read-more-content');
+        p.addClass('hide');
+        p.prev('.read-more-show').removeClass('hide'); // Hide only the preceding "Read More"
+        e.preventDefault();
+    });
+}
+
+
+
+
+
 
 // var flag = true;
 // function loadMore(){
@@ -135,7 +168,7 @@ It will get the JSON object from RIT API and then build the strings using count 
  */
 function getMinors(loadfactor) {
 
-    var title ="";
+    var title = "";
     var description = "";
     var totalMinors = [];
 
@@ -143,8 +176,10 @@ function getMinors(loadfactor) {
     // const containerDiv =  document.getElementById("overview-description");
 
 
-    myXhr('get', {path: '/minors/'}).done(function (json) {
-         totalMinors = json.UgMinors;
+    myXhr('get', {
+        path: '/minors/'
+    }).done(function (json) {
+        totalMinors = json.UgMinors;
 
         console.log(totalMinors);
 
@@ -152,13 +187,13 @@ function getMinors(loadfactor) {
         console.log(truncateString(totalMinors[1].description, 500));
 
         // count will be used to alternatively display the two sections that we have
-    count = 0;
-    i = 0 ;
+        count = 0;
+        i = 0;
 
         // console.log(totalMinors[0].title);
 
 
-        while ( i <= totalMinors.length/loadfactor) {
+        while (i <= totalMinors.length / loadfactor) {
             // console.log(totalMinors[i].title);
 
             // console.log(minor);
@@ -166,58 +201,60 @@ function getMinors(loadfactor) {
 
 
 
-        if (count % 2 == 0) {
+            if (count % 2 == 0) {
 
-            // defining section 1
-            output = '      <div class="row justify-content-center no-gutters mb-5 mb-lg-0">\n' +
-                '        <div class="col-lg-6">\n' +
-                '          <img class="img-fluid" src="img/minorimage.jpeg" alt="">\n' +
-                '        </div>\n' +
-                '        <div class="col-lg-6">\n' +
-                '          <div class="bg-black text-center h-100 project">\n' +
-                '            <div class="d-flex h-100">\n' +
-                '              <div class="project-text w-100 my-auto text-center text-lg-left">\n' +
-                '                <h4 class="text-white">'+totalMinors[i].title+'</h4>\n' +
-                '                <p class="mb-0 text-white-50">'+truncateString(totalMinors[i].description, 300)+'</p>\n' +
-                '                <hr class="d-none d-lg-block mb-0 ml-0">\n' +
-                '              </div>\n' +
-                '            </div>\n' +
-                '          </div>\n' +
-                '        </div>\n' +
-                '      </div>';
+                // defining section 1
+                output = '      <div class="row justify-content-center no-gutters mb-5 mb-lg-0">\n' +
+                    '        <div class="col-lg-6">\n' +
+                    '          <img class="img-fluid" src="img/minorimage.jpeg" alt="">\n' +
+                    '        </div>\n' +
+                    '        <div class="col-lg-6">\n' +
+                    '          <div class="bg-black text-center h-100 project">\n' +
+                    '            <div class="d-flex h-100">\n' +
+                    '              <div class="project-text w-100 my-auto text-center text-lg-left">\n' +
+                    '                <h4 class="text-white">' + totalMinors[i].title + '</h4>\n' +
+                    '                <p class="mb-0 text-white-50">' +totalMinors[i].description.slice(0,300) + '</p> <a class="read-more-show hide" href="###" onclick="readMore()"> Read More</a> <span class="read-more-content mb-0 text-white-50 ">\n'
+                    +'-'+totalMinors[i].description.slice(300) + '<a class="read-more-hide hide" href="#"> Read Less</a>'+
+                    '                <hr class="d-none d-lg-block mb-0 ml-0">\n' +
+                    '              </div>\n' +
+                    '            </div>\n' +
+                    '          </div>\n' +
+                    '        </div>\n' +
+                    '      </div>';
 
 
-        } else {
+            } else {
 
-            output = '<!-- Project Two Row -->\n' +
-                '      <div class="row justify-content-center no-gutters">\n' +
-                '        <div class="col-lg-6">\n' +
-                '          <img class="img-fluid" src="img/demo-image-02.jpg" alt="">\n' +
-                '        </div>\n' +
-                '        <div class="col-lg-6 order-lg-first">\n' +
-                '          <div class="bg-black text-center h-100 project">\n' +
-                '            <div class="d-flex h-100">\n' +
-                '              <div class="project-text w-100 my-auto text-center text-lg-right">\n' +
-                '                <h4 class="text-white">' + totalMinors[i].title + ' </h4>' +
-                '                <p class="mb-0 text-white-50">' + truncateString(totalMinors[i].description, 300) + '</p>\n' +
-                '                <hr class="d-none d-lg-block mb-0 mr-0">\n' +
-                '              </div>\n' +
-                '            </div>\n' +
-                '          </div>\n' +
-                '        </div>\n' +
-                '      </div>';
-        }
-        // console.log(count); testing purposes
-        count++;
+                output = '<!-- Project Two Row -->\n' +
+                    '      <div class="row justify-content-center no-gutters">\n' +
+                    '        <div class="col-lg-6">\n' +
+                    '          <img class="img-fluid" src="img/demo-image-02.jpg" alt="">\n' +
+                    '        </div>\n' +
+                    '        <div class="col-lg-6 order-lg-first">\n' +
+                    '          <div class="bg-black text-center h-100 project">\n' +
+                    '            <div class="d-flex h-100">\n' +
+                    '              <div class="project-text w-100 my-auto text-center text-lg-right">\n' +
+                    '                <h4 class="text-white">' + totalMinors[i].title + ' </h4>' +
+                    '                <p class="mb-0 text-white-50">' +totalMinors[i].description.slice(0,300)+'</p> <a class="read-more-show hide" href="###" onclick="readMore()"> Read More</a> <span class="read-more-content mb-0 text-white-50 ">\n'
+                    +'-'+totalMinors[i].description.slice(300)+'<a class="read-more-hide hide" href="#"> Read Less</a>'+
+                    '                <hr class="d-none d-lg-block mb-0 mr-0">\n' +
+                    '              </div>\n' +
+                    '            </div>\n' +
+                    '          </div>\n' +
+                    '        </div>\n' +
+                    '      </div>';
+            }
+            // console.log(count); testing purposes
+            count++;
 
-        document.getElementById('minor-wrapper').innerHTML += output;
+            document.getElementById('minor-wrapper').innerHTML += output;
 
             i++;
-    }
+        }
 
 
 
-
+        readMore();
     });
 
 
@@ -228,16 +265,16 @@ function getMinors(loadfactor) {
 
 
 
-function myXhr(t, d){
+function myXhr(t, d) {
     return $.ajax({
-        type:t,
-        url:'http://serenity.ist.rit.edu/~plgics/proxy.php',
-        dataType:'json',
-        data:d,
-        cache:false,
-        async:true,
+        type: t,
+        url: 'http://serenity.ist.rit.edu/~plgics/proxy.php',
+        dataType: 'json',
+        data: d,
+        cache: false,
+        async: true,
 
-    }).fail(function(){
+    }).fail(function () {
         //handle failure
     });
 }
@@ -254,50 +291,50 @@ var currentWord = 0;
 
 words[currentWord].style.opacity = 1;
 for (var i = 0; i < words.length; i++) {
-  splitLetters(words[i]);
+    splitLetters(words[i]);
 }
 
 function changeWord() {
-  var cw = wordArray[currentWord];
-  var nw = currentWord == words.length-1 ? wordArray[0] : wordArray[currentWord+1];
-  for (var i = 0; i < cw.length; i++) {
-    animateLetterOut(cw, i);
-  }
+    var cw = wordArray[currentWord];
+    var nw = currentWord == words.length - 1 ? wordArray[0] : wordArray[currentWord + 1];
+    for (var i = 0; i < cw.length; i++) {
+        animateLetterOut(cw, i);
+    }
 
-  for (var i = 0; i < nw.length; i++) {
-    nw[i].className = 'letter behind';
-    nw[0].parentElement.style.opacity = 1;
-    animateLetterIn(nw, i);
-  }
+    for (var i = 0; i < nw.length; i++) {
+        nw[i].className = 'letter behind';
+        nw[0].parentElement.style.opacity = 1;
+        animateLetterIn(nw, i);
+    }
 
-  currentWord = (currentWord == wordArray.length-1) ? 0 : currentWord+1;
+    currentWord = (currentWord == wordArray.length - 1) ? 0 : currentWord + 1;
 }
 
 function animateLetterOut(cw, i) {
-  setTimeout(function() {
-		cw[i].className = 'letter out';
-  }, i*80);
+    setTimeout(function () {
+        cw[i].className = 'letter out';
+    }, i * 80);
 }
 
 function animateLetterIn(nw, i) {
-  setTimeout(function() {
-		nw[i].className = 'letter in';
-  }, 340+(i*80));
+    setTimeout(function () {
+        nw[i].className = 'letter in';
+    }, 340 + (i * 80));
 }
 
 function splitLetters(word) {
-  var content = word.innerHTML;
-  word.innerHTML = '';
-  var letters = [];
-  for (var i = 0; i < content.length; i++) {
-    var letter = document.createElement('span');
-    letter.className = 'letter';
-    letter.innerHTML = content.charAt(i);
-    word.appendChild(letter);
-    letters.push(letter);
-  }
+    var content = word.innerHTML;
+    word.innerHTML = '';
+    var letters = [];
+    for (var i = 0; i < content.length; i++) {
+        var letter = document.createElement('span');
+        letter.className = 'letter';
+        letter.innerHTML = content.charAt(i);
+        word.appendChild(letter);
+        letters.push(letter);
+    }
 
-  wordArray.push(letters);
+    wordArray.push(letters);
 }
 
 changeWord();
@@ -311,7 +348,8 @@ setInterval(changeWord, 4000);
 
 
 
-
-getMinors(4);
+readMore();
+getMinors(2);
+readMore();
 buildOverview();
 buildStaffFaculty();
