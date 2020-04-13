@@ -7,7 +7,6 @@ const removeChildren = (div) => {
     }
 }
 
-
 function buildOverview() {
     const titleDiv = document.getElementById("overview-title");
     const containerDiv = document.getElementById("overview-description");
@@ -30,7 +29,6 @@ function buildOverview() {
     });
 
 }
-
 
 function buildStaffFaculty() {
     const titleDiv = document.getElementById("faculty-staff-header");
@@ -131,36 +129,6 @@ function readMore() {
 }
 
 
-
-
-
-
-// var flag = true;
-// function loadMore(){
-//
-//     if (flag){
-//
-//     getMinors(1);
-//     flag = false;
-//     // document.getElementById('loadmoretext').innerHTML = "";
-//     // document.getElementById('loadmoretext').innerHTML = "Load Less";
-//         console.log(flag);
-//
-//     }
-//     if (!flag){
-//         getMinors(2);
-//         flag = true;
-//         // document.getElementById('loadmoretext').innerHTML = "";
-//         // document.getElementById('loadmoretext').innerHTML = "Load More";
-//         console.log(flag);
-//         // console.log(loadfactor);
-//
-//     }
-//
-// }
-
-
-
 /*
 this function is responsible fro populating the Minors section in index.html,
 It will get the JSON object from RIT API and then build the strings using count (if count is even use section 1 or use section 2)
@@ -172,8 +140,6 @@ function getMinors(loadfactor) {
     var description = "";
     var totalMinors = [];
 
-    // const titleDiv =  document.getElementById("overview-title");
-    // const containerDiv =  document.getElementById("overview-description");
 
 
     myXhr('get', {
@@ -186,26 +152,20 @@ function getMinors(loadfactor) {
         console.log(totalMinors[1].description.length);
         console.log(truncateString(totalMinors[1].description, 500));
 
-        // count will be used to alternatively display the two sections that we have
         count = 0;
         i = 0;
 
-        // console.log(totalMinors[0].title);
 
         const minorID =  document.getElementById('minor-wrapper');
 
 
         while (i <= totalMinors.length / loadfactor) {
-            // console.log(totalMinors[i].title);
 
-            // console.log(minor);
             var output = "";
 
             const div1 = document.createElement("div");
 
             if (count % 2 == 0) {
-
-                // defining section 1
 
 
                 div1.setAttribute("class", "row justify-content-center no-gutters mb-5 mb-lg-0");
@@ -254,7 +214,7 @@ function getMinors(loadfactor) {
 
                 const span = document.createElement("span");
                 span.setAttribute("class", "read-more-content mb-0 text-white-50");
-                span.appendChild(document.createTextNode('-'+totalMinors[i].description.slice(300)));
+                span.appendChild(document.createTextNode(totalMinors[i].description.slice(300)));
                 div6.appendChild(span);
 
                 const a2 = document.createElement("a");
@@ -266,31 +226,9 @@ function getMinors(loadfactor) {
 
                 const hr = document.createElement("span");
                 hr.setAttribute("class", "d-none d-lg-block mb-0 ml-0");
-                hr.appendChild(document.createTextNode('-'+totalMinors[i].description.slice(300)));
                 span.appendChild(hr);
 
 
-
-
-
-                // output = '      <div class="row justify-content-center no-gutters mb-5 mb-lg-0">\n' +
-                //     '        <div class="col-lg-6">\n' +
-                //     '          <img class="img-fluid" src="img/minorimage.jpeg" alt="">\n' +
-                //     '        </div>\n' +
-                //     '        <div class="col-lg-6">\n' +
-                //     '          <div class="bg-black text-center h-100 project">\n' +
-                //     '            <div class="d-flex h-100">\n' +
-                //     '              <div class="project-text w-100 my-auto text-center text-lg-left">\n' +
-                //     '                <h4 class="text-white">' + totalMinors[i].title + '</h4>\n' +
-                //     '                <p class="mb-0 text-white-50">' +totalMinors[i].description.slice(0,300) + '</p> ' +
-                //     '<a class="read-more-show hide" href="###" onclick="readMore()"> Read More</a> <span class="read-more-content mb-0 text-white-50 ">\n'
-                //     +'-'+totalMinors[i].description.slice(300) + '<a class="read-more-hide hide" href="#"> Read Less</a>'+
-                //     '                <hr class="d-none d-lg-block mb-0 ml-0">\n' +
-                //     '              </div>\n' +
-                //     '            </div>\n' +
-                //     '          </div>\n' +
-                //     '        </div>\n' +
-                //     '      </div>';
 
 
             } else {
@@ -341,7 +279,7 @@ function getMinors(loadfactor) {
 
                 const span = document.createElement("span");
                 span.setAttribute("class", "read-more-content mb-0 text-white-50");
-                span.appendChild(document.createTextNode('-'+totalMinors[i].description.slice(300)));
+                span.appendChild(document.createTextNode(totalMinors[i].description.slice(300)));
                 div6.appendChild(span);
 
                 const a2 = document.createElement("a");
@@ -353,35 +291,13 @@ function getMinors(loadfactor) {
 
                 const hr = document.createElement("span");
                 hr.setAttribute("class", "d-none d-lg-block mb-0 ml-0");
-                hr.appendChild(document.createTextNode('-'+totalMinors[i].description.slice(300)));
                 span.appendChild(hr);
 
-                // output = '<!-- Project Two Row -->\n' +
-                //     '      <div class="row justify-content-center no-gutters">\n' +
-                //     '        <div class="col-lg-6">\n' +
-                //     '          <img class="img-fluid" src="img/demo-image-02.jpg" alt="">\n' +
-                //     '        </div>\n' +
-                //     '        <div class="col-lg-6 order-lg-first">\n' +
-                //     '          <div class="bg-black text-center h-100 project">\n' +
-                //     '            <div class="d-flex h-100">\n' +
-                //     '              <div class="project-text w-100 my-auto text-center text-lg-right">\n' +
-                //     '                <h4 class="text-white">' + totalMinors[i].title + ' </h4>' +
-                //     '                <p class="mb-0 text-white-50">' +totalMinors[i].description.slice(0,300)+'</p> <a class="read-more-show hide" href="###" onclick="readMore()"> Read More</a> <span class="read-more-content mb-0 text-white-50 ">\n'
-                //     +'-'+totalMinors[i].description.slice(300)+'<a class="read-more-hide hide" href="#"> Read Less</a>'+
-                //     '                <hr class="d-none d-lg-block mb-0 mr-0">\n' +
-                //     '              </div>\n' +
-                //     '            </div>\n' +
-                //     '          </div>\n' +
-                //     '        </div>\n' +
-                //     '      </div>';
 
             }
             minorID.appendChild(div1);
 
-            // console.log(count); testing purposes
             count++;
-
-            // document.getElementById('minor-wrapper').innerHTML += output;
 
 
             i++;
@@ -402,8 +318,6 @@ function getMajors(loadfactor) {
     var description = "";
     var totalMajors = [];
 
-    // const titleDiv =  document.getElementById("overview-title");
-    // const containerDiv =  document.getElementById("overview-description");
 
 
     myXhr('get', {
@@ -416,7 +330,6 @@ function getMajors(loadfactor) {
         console.log(totalMajors[1].description.length);
         console.log(truncateString(totalMajors[1].description, 500));
 
-        // count will be used to alternatively display the two sections that we have
         count = 0;
         i = 0;
 
@@ -426,16 +339,11 @@ function getMajors(loadfactor) {
 
 
         while (i <= totalMajors.length) {
-            // console.log(totalMinors[i].title);
-
-            // console.log(minor);
-            var output = "";
 
             const div1 = document.createElement("div");
 
             if (count % 2 == 0) {
 
-                // defining section 1
 
 
                 div1.setAttribute("class", "row justify-content-center no-gutters mb-5 mb-lg-0");
@@ -496,31 +404,9 @@ function getMajors(loadfactor) {
 
                 const hr = document.createElement("span");
                 hr.setAttribute("class", "d-none d-lg-block mb-0 ml-0");
-                hr.appendChild(document.createTextNode('-'+totalMajors[i].description));
                 span.appendChild(hr);
 
 
-
-
-
-                // output = '      <div class="row justify-content-center no-gutters mb-5 mb-lg-0">\n' +
-                //     '        <div class="col-lg-6">\n' +
-                //     '          <img class="img-fluid" src="img/minorimage.jpeg" alt="">\n' +
-                //     '        </div>\n' +
-                //     '        <div class="col-lg-6">\n' +
-                //     '          <div class="bg-black text-center h-100 project">\n' +
-                //     '            <div class="d-flex h-100">\n' +
-                //     '              <div class="project-text w-100 my-auto text-center text-lg-left">\n' +
-                //     '                <h4 class="text-white">' + totalMinors[i].title + '</h4>\n' +
-                //     '                <p class="mb-0 text-white-50">' +totalMinors[i].description.slice(0,300) + '</p> ' +
-                //     '<a class="read-more-show hide" href="###" onclick="readMore()"> Read More</a> <span class="read-more-content mb-0 text-white-50 ">\n'
-                //     +'-'+totalMinors[i].description.slice(300) + '<a class="read-more-hide hide" href="#"> Read Less</a>'+
-                //     '                <hr class="d-none d-lg-block mb-0 ml-0">\n' +
-                //     '              </div>\n' +
-                //     '            </div>\n' +
-                //     '          </div>\n' +
-                //     '        </div>\n' +
-                //     '      </div>';
 
 
             } else {
@@ -583,35 +469,13 @@ function getMajors(loadfactor) {
 
                 const hr = document.createElement("span");
                 hr.setAttribute("class", "d-none d-lg-block mb-0 ml-0");
-                hr.appendChild(document.createTextNode('-'+totalMajors[i].description));
                 span.appendChild(hr);
 
-                // output = '<!-- Project Two Row -->\n' +
-                //     '      <div class="row justify-content-center no-gutters">\n' +
-                //     '        <div class="col-lg-6">\n' +
-                //     '          <img class="img-fluid" src="img/demo-image-02.jpg" alt="">\n' +
-                //     '        </div>\n' +
-                //     '        <div class="col-lg-6 order-lg-first">\n' +
-                //     '          <div class="bg-black text-center h-100 project">\n' +
-                //     '            <div class="d-flex h-100">\n' +
-                //     '              <div class="project-text w-100 my-auto text-center text-lg-right">\n' +
-                //     '                <h4 class="text-white">' + totalMinors[i].title + ' </h4>' +
-                //     '                <p class="mb-0 text-white-50">' +totalMinors[i].description.slice(0,300)+'</p> <a class="read-more-show hide" href="###" onclick="readMore()"> Read More</a> <span class="read-more-content mb-0 text-white-50 ">\n'
-                //     +'-'+totalMinors[i].description.slice(300)+'<a class="read-more-hide hide" href="#"> Read Less</a>'+
-                //     '                <hr class="d-none d-lg-block mb-0 mr-0">\n' +
-                //     '              </div>\n' +
-                //     '            </div>\n' +
-                //     '          </div>\n' +
-                //     '        </div>\n' +
-                //     '      </div>';
 
             }
             majorID.appendChild(div1);
 
-            // console.log(count); testing purposes
             count++;
-
-            // document.getElementById('minor-wrapper').innerHTML += output;
 
 
             i++;
@@ -625,10 +489,6 @@ function getMajors(loadfactor) {
 
 
 }
-
-
-
-
 
 function myXhr(t, d) {
     return $.ajax({
@@ -705,11 +565,6 @@ function splitLetters(word) {
 changeWord();
 setInterval(changeWord, 4000);
 // ------ End of Animation code --------
-
-
-
-
-
 
 
 
