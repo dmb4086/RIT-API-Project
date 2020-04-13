@@ -303,7 +303,7 @@ function getMinors(loadfactor) {
 
                 const img = document.createElement("img");
                 img.setAttribute("class", "img-fluid");
-                img.setAttribute("src", "img/demo-image-02.jpg");
+                img.setAttribute("src", "img/web.jpg");
                 div2.appendChild(img);
 
                 const div3 = document.createElement("div");
@@ -396,6 +396,235 @@ function getMinors(loadfactor) {
 
 }
 
+function getMajors(loadfactor) {
+
+    var title = "";
+    var description = "";
+    var totalMajors = [];
+
+    // const titleDiv =  document.getElementById("overview-title");
+    // const containerDiv =  document.getElementById("overview-description");
+
+
+    myXhr('get', {
+        path: '/degrees/'
+    }).done(function (json) {
+        totalMajors = json.undergraduate;
+
+        console.log(totalMajors);
+
+        console.log(totalMajors[1].description.length);
+        console.log(truncateString(totalMajors[1].description, 500));
+
+        // count will be used to alternatively display the two sections that we have
+        count = 0;
+        i = 0;
+
+        console.log(totalMajors[0].title);
+
+        const majorID =  document.getElementById('major-wrapper');
+
+
+        while (i <= totalMajors.length) {
+            // console.log(totalMinors[i].title);
+
+            // console.log(minor);
+            var output = "";
+
+            const div1 = document.createElement("div");
+
+            if (count % 2 == 0) {
+
+                // defining section 1
+
+
+                div1.setAttribute("class", "row justify-content-center no-gutters mb-5 mb-lg-0");
+
+                const div2 = document.createElement("div");
+                div2.setAttribute("class", "col-lg-6");
+                div1.appendChild(div2);
+
+                const img = document.createElement("img");
+                img.setAttribute("class", "img-fluid");
+                img.setAttribute("src", "img/minorimage.jpeg");
+                div2.appendChild(img);
+
+                const div3 = document.createElement("div");
+                div3.setAttribute("class", "col-lg-6");
+                div1.appendChild(div3);
+
+                const div4 = document.createElement("div");
+                div4.setAttribute("class", "bg-black text-center h-100 project");
+                div3.appendChild(div4);
+
+                const div5 = document.createElement("div");
+                div5.setAttribute("class", "d-flex h-100");
+                div4.appendChild(div5);
+
+                const div6 = document.createElement("div");
+                div6.setAttribute("class", "project-text w-100 my-auto text-center text-lg-left");
+                div5.appendChild(div6);
+
+                const h4 = document.createElement("h4");
+                h4.setAttribute("class", "text-white");
+                h4.appendChild(document.createTextNode(totalMajors[i].title));
+                div6.appendChild(h4);
+
+                const p = document.createElement("p");
+                p.setAttribute("class", "mb-0 text-white-50");
+                p.appendChild(document.createTextNode(totalMajors[i].description));
+                div6.appendChild(p);
+
+                const a = document.createElement("a");
+                a.setAttribute("class", "read-more-show hide");
+                a.setAttribute("href", "###");
+                a.setAttribute("onclick", "readMore()");
+                a.appendChild(document.createTextNode("Read More"));
+                div6.appendChild(a);
+
+                const span = document.createElement("span");
+                span.setAttribute("class", "read-more-content mb-0 text-white-50");
+                span.appendChild(document.createTextNode('-'+totalMajors[i].description));
+                div6.appendChild(span);
+
+                const a2 = document.createElement("a");
+                a2.setAttribute("class", "read-more-hide hide");
+                a2.setAttribute("href", "#");
+                a2.setAttribute("onclick", "readMore()");
+                a2.appendChild(document.createTextNode("Read Less"));
+                span.appendChild(a2);
+
+                const hr = document.createElement("span");
+                hr.setAttribute("class", "d-none d-lg-block mb-0 ml-0");
+                hr.appendChild(document.createTextNode('-'+totalMajors[i].description));
+                span.appendChild(hr);
+
+
+
+
+
+                // output = '      <div class="row justify-content-center no-gutters mb-5 mb-lg-0">\n' +
+                //     '        <div class="col-lg-6">\n' +
+                //     '          <img class="img-fluid" src="img/minorimage.jpeg" alt="">\n' +
+                //     '        </div>\n' +
+                //     '        <div class="col-lg-6">\n' +
+                //     '          <div class="bg-black text-center h-100 project">\n' +
+                //     '            <div class="d-flex h-100">\n' +
+                //     '              <div class="project-text w-100 my-auto text-center text-lg-left">\n' +
+                //     '                <h4 class="text-white">' + totalMinors[i].title + '</h4>\n' +
+                //     '                <p class="mb-0 text-white-50">' +totalMinors[i].description.slice(0,300) + '</p> ' +
+                //     '<a class="read-more-show hide" href="###" onclick="readMore()"> Read More</a> <span class="read-more-content mb-0 text-white-50 ">\n'
+                //     +'-'+totalMinors[i].description.slice(300) + '<a class="read-more-hide hide" href="#"> Read Less</a>'+
+                //     '                <hr class="d-none d-lg-block mb-0 ml-0">\n' +
+                //     '              </div>\n' +
+                //     '            </div>\n' +
+                //     '          </div>\n' +
+                //     '        </div>\n' +
+                //     '      </div>';
+
+
+            } else {
+
+                div1.setAttribute("class", "row justify-content-center no-gutters");
+
+                const div2 = document.createElement("div");
+                div2.setAttribute("class", "col-lg-6");
+                div1.appendChild(div2);
+
+                const img = document.createElement("img");
+                img.setAttribute("class", "img-fluid");
+                img.setAttribute("src", "img/web.jpg");
+                div2.appendChild(img);
+
+                const div3 = document.createElement("div");
+                div3.setAttribute("class", "col-lg-6 order-lg-first");
+                div1.appendChild(div3);
+
+                const div4 = document.createElement("div");
+                div4.setAttribute("class", "bg-black text-center h-100 project");
+                div3.appendChild(div4);
+
+                const div5 = document.createElement("div");
+                div5.setAttribute("class", "d-flex h-100");
+                div4.appendChild(div5);
+
+                const div6 = document.createElement("div");
+                div6.setAttribute("class", "project-text w-100 my-auto text-center text-lg-left");
+                div5.appendChild(div6);
+
+                const h4 = document.createElement("h4");
+                h4.setAttribute("class", "text-white");
+                h4.appendChild(document.createTextNode(totalMajors[i].title));
+                div6.appendChild(h4);
+
+                const p = document.createElement("p");
+                p.setAttribute("class", "mb-0 text-white-50");
+                p.appendChild(document.createTextNode(totalMajors[i].description));
+                div6.appendChild(p);
+
+                const a = document.createElement("a");
+                a.setAttribute("class", "read-more-show hide");
+                a.setAttribute("href", "###");
+                a.setAttribute("onclick", "readMore()");
+                a.appendChild(document.createTextNode("Read More"));
+                div6.appendChild(a);
+
+                const span = document.createElement("span");
+                span.setAttribute("class", "read-more-content mb-0 text-white-50");
+                span.appendChild(document.createTextNode('-'+totalMajors[i]));
+                div6.appendChild(span);
+
+                const a2 = document.createElement("a");
+                a2.setAttribute("class", "read-more-hide hide");
+                a2.setAttribute("href", "#");
+                a2.setAttribute("onclick", "readMore()");
+                a2.appendChild(document.createTextNode("Read Less"));
+                span.appendChild(a2);
+
+                const hr = document.createElement("span");
+                hr.setAttribute("class", "d-none d-lg-block mb-0 ml-0");
+                hr.appendChild(document.createTextNode('-'+totalMajors[i].description));
+                span.appendChild(hr);
+
+                // output = '<!-- Project Two Row -->\n' +
+                //     '      <div class="row justify-content-center no-gutters">\n' +
+                //     '        <div class="col-lg-6">\n' +
+                //     '          <img class="img-fluid" src="img/demo-image-02.jpg" alt="">\n' +
+                //     '        </div>\n' +
+                //     '        <div class="col-lg-6 order-lg-first">\n' +
+                //     '          <div class="bg-black text-center h-100 project">\n' +
+                //     '            <div class="d-flex h-100">\n' +
+                //     '              <div class="project-text w-100 my-auto text-center text-lg-right">\n' +
+                //     '                <h4 class="text-white">' + totalMinors[i].title + ' </h4>' +
+                //     '                <p class="mb-0 text-white-50">' +totalMinors[i].description.slice(0,300)+'</p> <a class="read-more-show hide" href="###" onclick="readMore()"> Read More</a> <span class="read-more-content mb-0 text-white-50 ">\n'
+                //     +'-'+totalMinors[i].description.slice(300)+'<a class="read-more-hide hide" href="#"> Read Less</a>'+
+                //     '                <hr class="d-none d-lg-block mb-0 mr-0">\n' +
+                //     '              </div>\n' +
+                //     '            </div>\n' +
+                //     '          </div>\n' +
+                //     '        </div>\n' +
+                //     '      </div>';
+
+            }
+            majorID.appendChild(div1);
+
+            // console.log(count); testing purposes
+            count++;
+
+            // document.getElementById('minor-wrapper').innerHTML += output;
+
+
+            i++;
+        }
+
+
+
+
+        readMore();
+    });
+
+
+}
 
 
 
@@ -489,3 +718,4 @@ getMinors(2);
 readMore();
 buildOverview();
 buildStaffFaculty();
+getMajors(1);
