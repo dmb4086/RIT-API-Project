@@ -40,7 +40,7 @@ function buildStaffFaculty() {
     }).done(function (json) {
         const titleText = document.createTextNode(json.title);
         titleDiv.appendChild(titleText);
-        const titleSubDivText = document.createTextNode(json.subTitle);
+        const titleSubDivText = document.createTextNode("To view more about our faculty and staff, scroll below.");
         titleSubDiv.appendChild(titleSubDivText);
         const faculty = json.faculty;
         const staff = json.staff;
